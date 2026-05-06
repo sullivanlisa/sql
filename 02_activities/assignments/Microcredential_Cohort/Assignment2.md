@@ -56,7 +56,7 @@ The store wants to keep customer addresses. Propose two architectures for the CU
 **HINT:** search type 1 vs type 2 slowly changing dimensions. 
 
 ```
-Your answer...
+Proposed architectures are in the png file with my logical models for prompts 1 & 2. My first proposal is Type 1: each customer has exactly 1 address, and that is overridden if the customer updates their address. My second proposal is Type 2: each address is added to the model, and a flag to check current status (true or false) will record the current address. Past addresses are kept, but the current status is changed to 'false'
 ```
 
 ***
