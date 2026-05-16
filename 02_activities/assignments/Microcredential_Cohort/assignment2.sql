@@ -170,12 +170,24 @@ Before your final group by you should have the product of those two queries (x*y
 --QUERY 8
 
 SELECT DISTINCT vendor_name, product_name,
+5*sum(original_price) OVER(PARTITION BY vi.vendor_id, vi.product_id) AS total_profit 
+FROM (
+	SELECT DISTINCT vendor_id, product_id, original_price, customer_id FROM vendor_inventory
+	CROSS JOIN (customer)
+) vi
+INNER JOIN vendor v
+	ON vi.vendor_id = v.vendor_id
+INNER JOIN product p
+	ON vi.product_id = p.product_id;
+	
+	
+/*SELECT DISTINCT vendor_name, product_name,
 original_price*5*(SELECT count() FROM customer) AS total_profit 
 FROM vendor_inventory vi
 INNER JOIN vendor v
 	ON vi.vendor_id = v.vendor_id
 INNER JOIN product p
-	ON vi.product_id = p.product_id;
+	ON vi.product_id = p.product_id;*/
 
 --END QUERY
 
